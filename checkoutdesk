@@ -1,1 +1,28 @@
+import time
+import paho.mqtt.client as mqtt
+mqttServer = "192.168.43.3"
+n=2   #DEMO CODE FOR 2 BASKETS
 
+topic = [0]*(n+1)
+bill = [0]*(n+1)
+
+def mqttCallback_SubscribeMessage(client,userdata,msg):
+	topic[int(msg.topic.split("/")[1])]=int(msg.topic.split("/")[1])
+	bill[int(msg.topic.split("/")[1])]=msg.payload
+
+mqttClient = mqtt.Client("mqttClient_sub")
+mqttClient.username_pw_set("rishav",password="rishav")
+mqttClient.on_message = mqttCallback_SubscribeMessage
+mqttClient.connect(mqttServer,1883,60000)
+mqttClient.subscribe("g/+")
+time.sleep(1)
+i=1
+while True:
+	
+    mqttClient.loop()
+	if(int(bill[i])):
+		print("Total Bill: " + str(bill[i]))
+		
+	i=i+1
+	if(i>n):
+		i=1
