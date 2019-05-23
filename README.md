@@ -6,3 +6,4 @@ Smart Retail Checkout System
 4. The basket is wifi enabled so it will upload the bill to the cloud.
 5. At the checkout desk, the bill will be automatically downloaded from the cloud.
 6. The customer does not have to wait for the cashier to manually scan each item and add it to the bill.
+7. The basket will be reset again for a new bill cycle.
